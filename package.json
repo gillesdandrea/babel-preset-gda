@@ -1,0 +1,39 @@
+{
+  "name": "babel-preset-gda",
+  "version": "0.1.1",
+  "description": "Babel preset including latest proposals (stage-0) and React/Flow.",
+  "author": "Gilles d'Andréa",
+  "repository": "https://github.com/gillesdandrea/babel-preset-gda",
+  "license": "MIT",
+  "main": "index.js",
+  "keywords": [
+    "babel-preset"
+  ],
+  "dependencies": {
+    "@babel/plugin-proposal-function-bind": "7.2.0",
+    "@babel/plugin-proposal-export-default-from": "7.2.0",
+    "@babel/plugin-proposal-logical-assignment-operators": "7.2.0",
+    "@babel/plugin-proposal-optional-chaining": "7.2.0",
+    "@babel/plugin-proposal-pipeline-operator": "7.2.0",
+    "@babel/plugin-proposal-nullish-coalescing-operator": "7.2.0",
+    "@babel/plugin-proposal-do-expressions": "7.2.0",
+    "@babel/plugin-proposal-decorators": "7.2.2",
+    "@babel/plugin-proposal-function-sent": "7.2.0",
+    "@babel/plugin-proposal-export-namespace-from": "7.2.0",
+    "@babel/plugin-proposal-numeric-separator": "7.2.0",
+    "@babel/plugin-proposal-throw-expressions": "7.2.0",
+    "@babel/plugin-syntax-dynamic-import": "7.2.0",
+    "@babel/plugin-syntax-import-meta": "7.2.0",
+    "@babel/plugin-proposal-class-properties": "7.2.1",
+    "@babel/plugin-proposal-json-strings": "7.2.0",
+    "@babel/preset-react": "7.0.0",
+    "@babel/preset-flow": "7.0.0",
+    "core-js": "2.6.1"
+  },
+  "peerDependencies": {
+    "@babel/core": "^7.0.0"
+  },
+  "devDependencies": {
+    "@babel/core": "7.2.2"
+  }
+}
