@@ -12,7 +12,7 @@ module.exports = function preset(
     stage = 0,
     loose = false,
     decoratorsLegacy = false,
-    decoratorsBeforeExport,
+    decoratorsBeforeExport = false,
     pipelineProposal = 'minimal',
     ...rest // used to configure @babel/preset-env (with `loose` too)
   } = {}
