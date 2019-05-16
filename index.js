@@ -9,6 +9,9 @@ module.exports = function preset(
     react = true, // or false or { pragma, pragmaFrag, ... }
     flow = false, // or false
     typescript = false, // or true or { isTSX, jsxPragma, allExtension }
+    transformRuntime = false,
+    useBuiltIns: "usage",
+    corejs: 3,
     stage = 0,
     loose = false,
     decoratorsLegacy = false,
@@ -18,7 +21,7 @@ module.exports = function preset(
   } = {}
 ) {
   const env = process.env.BABEL_ENV || process.env.NODE_ENV;
-  const envConfig = { loose, ...rest };
+  const envConfig = { useBuiltIns, corejs, loose, ...rest };
   const reactConfig = {
     development: env === 'development',
     ...(typeof react === 'object' ? react : {}),
@@ -36,6 +39,8 @@ module.exports = function preset(
       typescript && [require('@babel/preset-typescript'), typescriptConfig],
     ].filter(Boolean),
     plugins: [
+      transformRuntime && [require('@babel/transform-runtime'), { corejs }],
+
       // Stage 0
       stage0 && require('@babel/plugin-proposal-function-bind'),
 
