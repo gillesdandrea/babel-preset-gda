@@ -10,8 +10,8 @@ module.exports = function preset(
     flow = false, // or false
     typescript = false, // or true or { isTSX, jsxPragma, allExtension }
     transformRuntime = false,
-    useBuiltIns: "usage",
-    corejs: 3,
+    useBuiltIns = 'usage',
+    corejs = 3,
     stage = 0,
     loose = false,
     decoratorsLegacy = false,
@@ -27,7 +27,7 @@ module.exports = function preset(
     ...(typeof react === 'object' ? react : {}),
   };
   const typescriptConfig = typeof react === 'object' ? typescript : undefined;
-  const stage0 = stage == 0;
+  const stage0 = stage === 0;
   const stage1 = stage <= 1;
   const stage2 = stage <= 2;
   const stage3 = stage <= 3;
@@ -39,7 +39,7 @@ module.exports = function preset(
       typescript && [require('@babel/preset-typescript'), typescriptConfig],
     ].filter(Boolean),
     plugins: [
-      transformRuntime && [require('@babel/transform-runtime'), { corejs }],
+      transformRuntime && [require('@babel/plugin-transform-runtime'), { corejs }],
 
       // Stage 0
       stage0 && require('@babel/plugin-proposal-function-bind'),
