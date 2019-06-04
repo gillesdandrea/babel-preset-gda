@@ -1,5 +1,3 @@
-/* eslint-disable global-require */
-
 // Inspired by https://github.com/babel/babel/tree/master/packages/babel-standalone/src
 // and by https://github.com/facebook/create-react-app/tree/master/packages/babel-preset-react-app
 //
@@ -9,7 +7,7 @@ module.exports = function preset(
     react = true, // or false or { pragma, pragmaFrag, ... }
     flow = false, // or false
     typescript = false, // or true or { isTSX, jsxPragma, allExtension }
-    transformRuntime = false,
+    transformRuntime = false, // or @babel/plugin-transform-runtime config
     useBuiltIns = 'entry',
     corejs = 3,
     stage = 0,
@@ -31,40 +29,45 @@ module.exports = function preset(
   const stage1 = stage <= 1;
   const stage2 = stage <= 2;
   const stage3 = stage <= 3;
-  return {
+  const config = {
     presets: [
-      [require('@babel/preset-env'), envConfig],
-      react && [require('@babel/preset-react'), reactConfig],
-      flow && require('@babel/preset-flow'),
-      typescript && [require('@babel/preset-typescript'), typescriptConfig],
+      ['@babel/preset-env', envConfig],
+      react && ['@babel/preset-react', reactConfig],
+      flow && '@babel/preset-flow',
+      typescript && ['@babel/preset-typescript', typescriptConfig],
     ].filter(Boolean),
     plugins: [
-      transformRuntime && [require('@babel/plugin-transform-runtime'), { corejs }],
+      transformRuntime && [
+        '@babel/plugin-transform-runtime',
+        { corejs, ...(typeof transformRuntime === 'object' ? transformRuntime : { useESModules: true }) },
+      ],
 
       // Stage 0
-      stage0 && require('@babel/plugin-proposal-function-bind'),
+      stage0 && '@babel/plugin-proposal-function-bind',
 
       // Stage 1
-      stage1 && require('@babel/plugin-proposal-export-default-from'),
-      stage1 && require('@babel/plugin-proposal-logical-assignment-operators'),
-      stage1 && [require('@babel/plugin-proposal-optional-chaining'), { loose }],
-      stage1 && [require('@babel/plugin-proposal-pipeline-operator'), { proposal: pipelineProposal }],
-      stage1 && [require('@babel/plugin-proposal-nullish-coalescing-operator'), { loose }],
-      stage1 && require('@babel/plugin-proposal-do-expressions'),
+      stage1 && '@babel/plugin-proposal-export-default-from',
+      stage1 && '@babel/plugin-proposal-logical-assignment-operators',
+      stage1 && ['@babel/plugin-proposal-optional-chaining', { loose }],
+      stage1 && ['@babel/plugin-proposal-pipeline-operator', { proposal: pipelineProposal }],
+      stage1 && ['@babel/plugin-proposal-nullish-coalescing-operator', { loose }],
+      stage1 && '@babel/plugin-proposal-do-expressions',
 
       // Stage 2
-      stage2 && [require('@babel/plugin-proposal-decorators'), { legacy: decoratorsLegacy, decoratorsBeforeExport }],
-      stage2 && require('@babel/plugin-proposal-function-sent'),
-      stage2 && require('@babel/plugin-proposal-export-namespace-from'),
-      stage2 && require('@babel/plugin-proposal-numeric-separator'),
-      stage2 && require('@babel/plugin-proposal-throw-expressions'),
+      stage2 && ['@babel/plugin-proposal-decorators', { legacy: decoratorsLegacy, decoratorsBeforeExport }],
+      stage2 && '@babel/plugin-proposal-function-sent',
+      stage2 && '@babel/plugin-proposal-export-namespace-from',
+      stage2 && '@babel/plugin-proposal-numeric-separator',
+      stage2 && '@babel/plugin-proposal-throw-expressions',
 
       // Stage 3
-      stage3 && require('@babel/plugin-syntax-dynamic-import'),
-      stage3 && require('@babel/plugin-syntax-import-meta'),
-      stage3 && [require('@babel/plugin-proposal-class-properties'), { loose }],
-      stage3 && require('@babel/plugin-proposal-json-strings'),
-      stage3 && [require('@babel/plugin-proposal-private-methods'), { loose }],
+      stage3 && '@babel/plugin-syntax-dynamic-import',
+      stage3 && '@babel/plugin-syntax-import-meta',
+      stage3 && ['@babel/plugin-proposal-class-properties', { loose }],
+      stage3 && '@babel/plugin-proposal-json-strings',
+      stage3 && ['@babel/plugin-proposal-private-methods', { loose }],
     ].filter(Boolean),
   };
+  // console.log(JSON.stringify(config, null, 2));
+  return config;
 };

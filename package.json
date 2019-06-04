@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-gda",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Babel preset including babel-preset-env, configurable latest TC39 proposals, React, Flow, TypeScript. Used by gda-scripts",
   "keywords": [
     "babel-preset"
@@ -9,7 +9,8 @@
   "license": "MIT",
   "author": "Gilles d'Andréa (https://github.com/gillesdandrea)",
   "main": "index.js",
-  "dependencies": {
+  "peerDependencies": {
+    "@babel/core": "^7.4.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-proposal-do-expressions": "^7.2.0",
@@ -33,10 +34,5 @@
     "@babel/preset-react": "^7.0.0",
     "@babel/preset-typescript": "^7.3.0"
   },
-  "devDependencies": {
-    "@babel/core": "^7.4.0"
-  },
-  "peerDependencies": {
-    "@babel/core": "^7.4.0"
-  }
+  "optionalDependencies": {}
 }
