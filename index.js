@@ -4,12 +4,13 @@
 module.exports = function preset(
   api,
   {
+    'print-config': printConfig = false,
     react = true, // or false or { pragma, pragmaFrag, ... }
     flow = false, // or false
     typescript = false, // or true or { isTSX, jsxPragma, allExtension }
     transformRuntime = false, // or @babel/plugin-transform-runtime config
-    useBuiltIns = 'entry',
-    corejs = 3,
+    useBuiltIns = 'false', // false | entry | usage
+    corejs = false, // false || 2 || 3
     stage = 0,
     loose = false,
     decoratorsLegacy = false,
@@ -68,6 +69,8 @@ module.exports = function preset(
       stage3 && ['@babel/plugin-proposal-private-methods', { loose }],
     ].filter(Boolean),
   };
-  // console.log(JSON.stringify(config, null, 2));
+  if (printConfig) {
+    console.log(JSON.stringify(config, null, 2));
+  }
   return config;
 };
