@@ -1,6 +1,6 @@
 {
   "name": "babel-preset-gda",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "Babel preset including babel-preset-env, configurable latest TC39 proposals, React, Flow, TypeScript. Used by gda-scripts",
   "keywords": [
     "babel-preset"
